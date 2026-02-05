@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghostivity | Red Team Specialist</title>
+    <!-- Фавикон -->
+    <link rel="icon" type="image/png" href="https://png.klev.club/uploads/posts/2024-04/png-klev-club-986t-p-prizrak-pikselnii-png-30.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <!-- Google Fonts: JetBrains Mono + кириллица -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap&subset=cyrillic" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'JetBrains Mono', 'Rajdhani', 'Consolas', monospace;
+            background: #11151c;
+        }
+        #vanta-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1;
+            opacity: 0.18;
+            filter: grayscale(0.8) brightness(0.8) blur(0.5px);
+        }
+        .pixel-avatar {
+            image-rendering: crisp-edges;
+            background: #191b23;
+            border-radius: 18px;
+            border: 2px solid #3b4151;
+            padding: 8px;
+            max-width: 200px;
+            box-shadow: 0 4px 32px #14151a88;
+        }
+        .section-header {
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 2px;
+            color: #6ba2ce;
+            font-size: 2.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        .card-hover {
+            transition: box-shadow 0.3s, border 0.3s, background 0.3s;
+            border: 1.5px solid #222837;
+            background: #161920cc;
+        }
+        .card-hover:hover {
+            background: #22262e;
+            box-shadow: 0 5px 32px #20263648;
+            border: 1.5px solid #394053;
+        }
+        .skill-bar {
+            height: 8px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #314958 0%, #181d24 100%);
+        }
+        .certificate-img, .certificate-img:hover {
+            filter: grayscale(70%) brightness(0.92) contrast(1.06);
+        }
+        a, a:visited { color: #90a4c8; transition: color 0.2s;}
+        a:hover { color: #d6e1f3;}
+        .mono { font-family: 'JetBrains Mono', monospace; }
+    </style>
+</head>
+<body class="bg-[#11151c] text-gray-200">
+    <div id="vanta-canvas"></div>
+
+    <!-- Fixed Navbar -->
+    <header class="fixed top-0 left-0 w-full z-20 bg-[#11151c]/90 backdrop-blur border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
+            <a href="#top" class="flex items-center space-x-2">
+                <span class="mono text-slate-200 text-sm tracking-widest">GHOSTIVITY</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6 mono text-sm">
+                <a href="#about" class="text-slate-300 hover:text-slate-100">Обо мне</a>
+                <a href="#skills" class="text-slate-300 hover:text-slate-100">Навыки</a>
+                <a href="#certs" class="text-slate-300 hover:text-slate-100">Сертификаты</a>
+                <a href="#contact" class="text-slate-300 hover:text-slate-100">Контакты</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Anchor for top -->
+    <div id="top"></div>
+
+    <!-- Top Visual Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center px-4 relative pt-16">
+        <div class="text-center max-w-3xl mx-auto relative z-10">
+            <img src="ghost.gif" width="900" height="900" alt="Ghostivity pixel avatar" class="pixel-avatar mx-auto mb-6 shadow-lg">
+            <h1 class="mono text-4xl md:text-5xl font-bold mb-4 tracking-widest text-slate-300">Ghostivity</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-slate-400">Red Team Specialist | Offensive Security</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto text-slate-400">
+                Специалист по социальной инженерии и фишинговым атакам с фокусом на тестирование осведомлённости сотрудников. Умею превращать уязвимости в человеческом факторе в точки входа для Red Team.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#contact" class="px-6 py-3 bg-slate-700 hover:bg-slate-800 text-slate-100 font-mono rounded-lg shadow transition-all duration-300 hover:scale-105">Связаться</a>
+                <a href="#skills" class="px-6 py-3 border border-slate-500 text-slate-300 hover:bg-slate-700/30 font-mono rounded-lg transition-all duration-300 hover:scale-105">Навыки</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header">Обо мне</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <div class="card-hover p-8 rounded-xl mb-6">
+                        <h3 class="text-xl font-semibold mb-4 text-slate-300 mono">Кратко</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li class="flex items-start"><i data-feather="user" class="w-5 h-5 mr-3 mt-1 text-slate-400"></i>
+                                <span>25 лет, Россия, готов к удалённой работе</span>
+                            </li>
+                            <li class="flex items-start"><i data-feather="cpu" class="w-5 h-5 mr-3 mt-1 text-slate-400"></i>
+                                <span>Специализация: социальная инженерия, фишинг, Red Team операции</span>
+                            </li>
+                            <li class="flex items-start"><i data-feather="code" class="w-5 h-5 mr-3 mt-1 text-slate-400"></i>
+                                <span>Технические навыки: Linux, Python, Bash, инструменты фишинга</span>
+                            </li>
+                            <li class="flex items-start"><i data-feather="codepen" class="w-5 h-5 mr-3 mt-1 text-slate-400"></i>
+                                <span>Хобби: Эксперименты с AI в домашних проектах</span>
+                            </li>
+                            <li class="flex items-start"><i data-feather="zap" class="w-5 h-5 mr-3 mt-1 text-slate-400"></i>
+                                <span>Самоучка с практическим опытом в offensive security</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-hover p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-300 mono">Опыт работы</h3>
+                    <div class="space-y-6 text-gray-300">
+                        <div>
+                            <h4 class="text-lg font-medium text-slate-200 mono">Социальная инженерия и фишинг</h4>
+                            <p class="text-slate-400 mt-1">Настройка и использование evilginx, GoPhish, EvilGoPhish, StopPhish. Создание фишинговых писем, запуск рассылок, копирование форм входа и создание одностраничных фишинговых сайтов для тестирования осведомлённости сотрудников.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-slate-200 mono">Автоматизация и разработка</h4>
+                            <p class="text-slate-400 mt-1">Написание скриптов на Python/bash для автоматизации. Поднятие и настройка AI сервиса по проверке писем. Адаптация HTML/CSS для фишинговых сайтов.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-slate-200 mono">Инструменты безопасности</h4>
+                            <p class="text-slate-400 mt-1">Опыт работы с Burp Suite, ReplicateUI, setoolkit, URLCrazy, dirb/gobuster. Использование готовых эксплойтов, перебор директорий и паролей.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-medium text-slate-200 mono">Работа с клиентами</h4>
+                            <p class="text-slate-400 mt-1">Провёл более 20 симулированных фишинговых атак на сотрудников клиентов (общий охват &gt;2000 человек); выявил несанкционированный доступ к корпоративной почте и вредоносное ПО по логам.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header">Навыки</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Advanced Skills -->
+                <div class="card-hover p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-300 mono">Продвинутый уровень</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-200">OSINT</span><span class="text-sm text-slate-300">80%</span></div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5"><div class="skill-bar" style="width: 80%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-200">Phishing</span><span class="text-sm text-slate-300">75%</span></div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5"><div class="skill-bar" style="width: 75%"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Intermediate -->
+                <div class="card-hover p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-300 mono">Средний уровень</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-200">Linux (Debian)</span><span class="text-sm text-slate-300">65%</span></div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5"><div class="skill-bar" style="width: 65%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-200">HTML/CSS</span><span class="text-sm text-slate-300">60%</span></div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5"><div class="skill-bar" style="width: 60%"></div></div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1"><span class="text-gray-200">Python/Bash</span><span class="text-sm text-slate-300">50%</span></div>
+                            <div class="w-full bg-slate-900 rounded-full h-2.5"><div class="skill-bar" style="width: 50%"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Basic Skills -->
+                <div class="card-hover p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-300 mono">Базовый уровень</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <span class="text-slate-300 flex items-center"><i data-feather="check" class="w-4 h-4 mr-2 text-slate-400"></i> OSINT Tools</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="check" class="w-4 h-4 mr-2 text-slate-400"></i> Neural Networks</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="check" class="w-4 h-4 mr-2 text-slate-400"></i> StopPhish</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="check" class="w-4 h-4 mr-2 text-slate-400"></i> GoPhish</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="check" class="w-4 h-4 mr-2 text-slate-400"></i> Social Engineering</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="check" class="w-4 h-4 mr-2 text-slate-400"></i> Automatization</span>
+                    </div>
+                </div>
+                <!-- Beginner Skills -->
+                <div class="card-hover p-8 rounded-xl">
+                    <h3 class="text-xl font-semibold mb-6 text-slate-300 mono">Домашние проекты</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <span class="text-slate-300 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2 text-slate-400"></i> Перенаправление трафика в зоне DMZ</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2 text-slate-400"></i> Быстрая генерация QR кодов из GIF файлов</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2 text-slate-400"></i> Фишинговая панель по мессенджеру</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2 text-slate-400"></i> ReAct ИИ агент в docker песочнице</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2 text-slate-400"></i> Алерт-Мониторинг срока действия доменов</span>
+                        <span class="text-slate-300 flex items-center"><i data-feather="zap" class="w-4 h-4 mr-2 text-slate-400"></i> Симуляция жизни ИИ модели</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certs" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="section-header">Сертификаты</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">DevOps простым языком</h3>
+                    <p class="text-slate-500 mt-2">Stepik, 2025</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">«Профессия — Белый Хакер»</h3>
+                    <p class="text-slate-500 mt-2">Stepik, 2025</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Лучший по Python. Для всех начинающих!</h3>
+                    <p class="text-slate-500 mt-2">Stepik, 2025</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Лучший по Python. Часть 2</h3>
+                    <p class="text-slate-500 mt-2">Stepik, 2025</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Доверенный искусственный интеллект</h3>
+                    <p class="text-slate-500 mt-2">Stepik, 2025</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Challenge: Password 123</h3>
+                    <p class="text-slate-500 mt-2">Cybrary, 2024</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Computer Hacking and Forensics</h3>
+                    <p class="text-slate-500 mt-2">Cybrary, 2024</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Introduction to IT & Cybersecurity</h3>
+                    <p class="text-slate-500 mt-2">Cybrary, 2024</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Анализ защищенности веб-приложений</h3>
+                    <p class="text-slate-500 mt-2">Академия кодебай, 2024</p>
+                </div>
+                <div class="card-hover p-6 rounded-xl">
+                    <h3 class="text-lg font-semibold text-slate-200 mono">Деловое общение</h3>
+                    <p class="text-slate-500 mt-2">ICL, 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="section-header">Контакты</h2>
+            <div class="card-hover p-8 rounded-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-6 text-slate-200 mono">Свяжитесь со мной</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center"><i data-feather="mail" class="w-6 h-6 mr-4 text-slate-400"></i><a href="mailto:def1337227@gmail.com" class="text-gray-300 hover:text-slate-100 transition-colors">def1337227@gmail.com</a></div>
+                            <div class="flex items-center"><i data-feather="github" class="w-6 h-6 mr-4 text-slate-400"></i><a href="https://github.com/Ghostivity" target="_blank" class="text-gray-300 hover:text-slate-100 transition-colors" rel="noopener noreferrer">github.com/Ghostivity</a></div>
+                            <div class="flex items-center"><i data-feather="award" class="w-6 h-6 mr-4 text-slate-400"></i><a href="https://app.hackthebox.com/profile/1735782" target="_blank" class="text-gray-300 hover:text-slate-100 transition-colors" rel="noopener noreferrer">HackTheBox Profile</a></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-6 text-slate-200 mono">Доступность</h3>
+                        <p class="text-gray-300 mb-4">Открыт для предложений.</p>
+                        <p class="text-slate-400"><i data-feather="alert-circle" class="w-5 h-5 inline mr-2 text-slate-400"></i>Сертификаты предоставлю по запросу при согласовании оффера.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to top button -->
+    <button id="backToTop" aria-label="Наверх" class="hidden fixed bottom-6 right-6 z-30 bg-slate-800/90 hover:bg-slate-700 text-slate-100 rounded-full p-3 shadow-lg transition-all duration-300">
+        <i data-feather="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="py-8 px-4 sm:px-6 lg:px-8 border-t border-slate-700/50 mt-16">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-slate-400">&copy; 2012-2026 Ghostivity.</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="https://github.com/Ghostivity" target="_blank" class="text-slate-400 hover:text-slate-100 transition-colors" rel="noopener noreferrer">
+                        <i data-feather="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://app.hackthebox.com/profile/1735782" target="_blank" class="text-slate-400 hover:text-slate-100 transition-colors" rel="noopener noreferrer">
+                        <i data-feather="award" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        let effect = VANTA.NET({
+            el: "#vanta-canvas",
+            mouseControls: true,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x3c5461,
+            backgroundColor: 0x11151c,
+            points: 7.00,
+            maxDistance: 12.00,
+            spacing: 10.00
+        });
+
+        feather.replace();
+
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                backToTop.classList.remove('hidden');
+            } else {
+                backToTop.classList.add('hidden');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    </script>
+</body>
+</html>
